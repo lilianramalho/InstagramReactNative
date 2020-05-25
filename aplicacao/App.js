@@ -3,6 +3,7 @@ import React , {Fragment , useState , useEffect} from 'react';
 
 import { 
   FlatList, 
+  StatusBar
   } from 'react-native';
 
   import { Cabecalho } from './src/components/cabecalho';
@@ -19,6 +20,10 @@ const App: () => React$Node = () => {
   }, [])
   return (
     <Fragment>
+      <StatusBar
+        backgroundColor = "white"
+        barStyle = "dark-content"
+      />
       <FlatList
           data={fotos}
           keyExtractor = {(item) => item.id.toString()}
