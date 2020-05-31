@@ -14,16 +14,14 @@ import estilo from './estilo'
 let campoInput;
 let mudaTexto = "";
 
-const Comentarios = ({comentarios}) =>{
+const Comentarios = ({comentarios , adicionarComentarios}) =>{
     const [comment, setComment] = useState(comentarios);
-    const adicionarComentarios = () => {
+    const comentar = () => {
         campoInput.clear();
-       const novoComentario = {
-            date: Date.now(),
-            text: mudaTexto,
-            userName: "Lilian"
-        }
-
+        const novoComentario = adicionarComentarios(
+            mudaTexto,
+            "liliaramalho"
+        ) 
         setComment([...comment , novoComentario]);
     }
 
@@ -53,7 +51,7 @@ const Comentarios = ({comentarios}) =>{
             placeholder={"Deixe seu comentário"}
             style = {estilo.campo}
             />
-            <TouchableOpacity style = {estilo.btnEnviar} onPress = {adicionarComentarios}>
+            <TouchableOpacity style = {estilo.btnEnviar} onPress = {comentar}>
                 <Text style = {estilo.textoBtn}> {"Publicar"} </Text>
             </TouchableOpacity>
         </View>

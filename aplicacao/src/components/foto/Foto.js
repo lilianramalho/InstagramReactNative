@@ -11,10 +11,9 @@ import {
 
   
 import estilo from './estilo'
-import { curtirFoto , getImgLike } from "../../api/curtidas";
 
 
-const Foto = ({urlFoto , descricaoFoto , likes , userName}) => {
+const Foto = ({urlFoto , descricaoFoto , likes , userName, getImgLike, curtirFoto }) => {
   const [curtiu , setCurtiu] = useState(false);
   const [qntlikes, setqntlikes] = useState(likes);
 
