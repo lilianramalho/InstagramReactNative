@@ -10,9 +10,32 @@ import {
   Image
   } from 'react-native';
 
-import estilo from "./estilo"
+import estilo from "./estilo";
+import efetuarLogin from "../../api/login";
+import AsyncStorage from "@react-native-community/async-storage";
 
-const Login = () => {
+const Login = ({navigation }) => {
+
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+  const [mensagemErro, setMensagemErro] = useState("");
+
+  const tentarLogar = async () =>{
+    try {
+      const token = await efetuarLogin(usuario , senha);
+      AsyncStorage.setItem("instalura_token" , token);
+
+      // ir para a tela de feed
+
+      navigation.replace("Feed", {nome: usuario});
+
+
+    } catch (error) {
+      setMensagemErro(error.message);  
+      
+    }
+  } 
+
   return (
     <Fragment>
       <StatusBar
@@ -30,15 +53,19 @@ const Login = () => {
         <View style = {estilo.containerCampos}>
         <TextInput
           placeholder = "Usuario"
+          onChangeText = {texto => setUsuario(texto)}
         />
-           <TextInput
+        <TextInput
           placeholder = "Senha"
           secureTextEntry = {true}
+          onChangeText = {texto => setSenha(texto)}
         />
+        <Text> {mensagemErro} </Text>
         </View>
         <Button
           title = "Entrar"
           style = {estilo.botao}
+          onPress = {tentarLogar}
         />
       </View>
       
@@ -46,6 +73,13 @@ const Login = () => {
     
   );
 };
+
+Login.navigationOptions = () => {
+  const opcoes ={
+      title : "Login"
+  }
+  return opcoes;
+}
 
 
 export default Login;

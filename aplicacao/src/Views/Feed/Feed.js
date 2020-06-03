@@ -54,5 +54,12 @@ const Feed = () => {
   );
 };
 
+Feed.navigationOptions = ({ navigation }) => {
+  const opcoes ={
+      title : navigation.getParam("nome")
+  }
+  return opcoes;
+}
+
 
 export default Feed;
